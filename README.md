@@ -1,4 +1,4 @@
-# travellerapp
+# Traveller Guide app
 
 A new Flutter project.
 
