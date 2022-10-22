@@ -1,6 +1,7 @@
 # Traveller Guide app
 
-A new Flutter project.
+This app will act as a tour guide
+
 
 ## Getting Started
 
