@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:travellerapp/Screens/screen_profile.dart';
-
-class CardItem {
-  final String urlImage;
-  final String title;
-  final String subtitle;
-
-  const CardItem(
-      {required this.urlImage, required this.title, required this.subtitle});
-}
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -20,124 +10,152 @@ class ScreenHome extends StatefulWidget {
 }
 
 class _ScreenHomeState extends State<ScreenHome> {
-  Color _iconColor = Colors.white, _appBar = const Color(0xFAB1F087);
-
-  List<CardItem> items = [
-    CardItem(
-        urlImage:
-            'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg ',
-        title: ' London , UK',
-        subtitle:
-            'London , UK One of the Beautiful place to live and to Visit.'),
-    CardItem(
-        urlImage:
-            'https://static.toiimg.com/thumb/msid-52040615,width-748,height-499,resizemode=4,imgsize-167596/Burj-al-arab.jpg',
-        title: ' Dubai ',
-        subtitle: 'Dubai One of the Beautiful place to live and to Visit.'),
-    CardItem(
-        urlImage:
-            'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
-        title: ' Munnar',
-        subtitle:
-            'Munnar,Idukki ,Kerala , India is one of the Beautiful place to live and to Visit.'),
-   
-  ];
+  // Color _iconColor = Colors.white, _appBar = const Color(0xFAB1F087);
 
   @override
   Widget build(BuildContext context) {
-    var listView = ListView.separated(
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) => cardCom(item: items[index]),
-      separatorBuilder: (context, _) => const SizedBox(width: 12),
-      itemCount: 3,
-    );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appBarcom(),
       bottomNavigationBar: bottomNavigationBar(),
       // ignore: prefer_const_constructors
 
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/backgroundimg.png'),
-            fit: BoxFit.cover,
+      body: ListView(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/backgroundimg.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-        child: listView,
+          cardof(),
+        ],
       ),
     );
   }
 
-  Widget cardCom({required CardItem item}) => Padding(
-        padding: const EdgeInsets.only(bottom:100),
-        child: Container(
-          width: 200,
-          height: 150,
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-            color: _iconColor,
-            elevation: 10.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Stack(
+  Widget cardof() => Padding(
+        padding: const EdgeInsets.only(top: 4.0, left: 16.0, right: 16.0),
+        child: Card(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.elliptical(20.0, 16.0),
+              topRight: Radius.elliptical(20.0, 16.0),
+              bottomLeft: Radius.elliptical(20.0, 16.0),
+              bottomRight: Radius.elliptical(20.0, 16.0),
+            ),
+          ),
+          elevation: 10.0,
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 180,
+                child: Stack(
                   children: [
-                    Ink.image(
-                      image: NetworkImage(item.urlImage),
-                      height: 150,
-                      width: 200,
-                      fit: BoxFit.cover,
+                    Positioned.fill(
+                      child: Image.network(
+                        height: 150,
+                        width: 200,
+                        'https://www.thestar.com/content/dam/thestar/life/travel/2022/07/08/an-insiders-guide-to-london-england-where-to-find-inspiring-art-cool-shops-and-classic-sunday-roast/london_england_credit_tomas_marek_istock.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Positioned(
-                      bottom: 16,
-                      right: 16,
-                      left: 16,
-                      child: Text(
-                        item.title,
-                        style: GoogleFonts.aBeeZee(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold),
+                      bottom: 16.0,
+                      left: 0.0,
+                      right: 16.0,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text('London',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline3!
+                                .copyWith(color: Colors.white)),
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-                  child: Text(
-                    item.subtitle,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+              SizedBox(height: 20.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
+                    Text(
+                        'An insiders guide to London, England: Where to find inspiring art, cool shops and classic Sunday roast'),
                     ButtonBar(
-                      alignment: MainAxisAlignment.start,
-                      children: [
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
                         TextButton(
                           onPressed: () {},
                           child: Text('View'),
                         ),
+                        IconButton(onPressed: () {}, icon: Icon(Icons.share))
                       ],
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.add_circle_outline),
                     )
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
+
+  //   Stack(
+  //     children: [
+  //       Ink.image(
+  //         image: NetworkImage(item.urlImage),
+  //         height: 150,
+  //         width: 200,
+  //         fit: BoxFit.cover,
+  //       ),
+  //       Positioned(
+  //         bottom: 16,
+  //         right: 16,
+  //         left: 16,
+  //         child: Text(
+  //           item.title,
+  //           style: GoogleFonts.aBeeZee(
+  //               color: Colors.white,
+  //               fontSize: 24,
+  //               fontWeight: FontWeight.bold),
+  //         ),
+  //       ),
+  //     ],
+  //   ),
+  //   Padding(
+  //     padding: const EdgeInsets.all(16).copyWith(bottom: 0),
+  //     child: Text(
+  //       item.subtitle,
+  //       style: TextStyle(
+  //         fontSize: 16,
+  //       ),
+  //     ),
+  //   ),
+  //   // const SizedBox(height: 50),
+  //   Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: [
+  //       ButtonBar(
+  //         alignment: MainAxisAlignment.start,
+  //         children: [
+  //           TextButton(
+  //             onPressed: () {},
+  //             child: Text('View'),
+  //           ),
+  //         ],
+  //       ),
+  //       IconButton(
+  //         onPressed: () {},
+  //         icon: Icon(Icons.add_circle_outline),
+  //       )
+  //     ],
+  //   ),
+  // ],
 
   Widget bottomNavigationBar() => Container(
         color: Colors.white70,
@@ -194,20 +212,15 @@ class _ScreenHomeState extends State<ScreenHome> {
         ),
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        actions: <Widget>[
-          InkWell(
-            onTap: (() {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ScreenProfile()));
-            }),
-            child: const CircleAvatar(
-                radius: 15.0,
-                backgroundColor: Colors.red,
-                backgroundImage: NetworkImage(
-                    'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg')),
-          )
-        ],
+      );
+
+  Widget secondSection() => Container(
+        child: Row(children: [
+          const Text('Time to Visit'),
+          TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
+              label: const Text('More'))
+        ]),
       );
 }

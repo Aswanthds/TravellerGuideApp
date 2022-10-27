@@ -11,7 +11,6 @@ class ScreenSplash extends StatefulWidget {
 }
 
 class _ScreenSearchState extends State<ScreenSplash> {
- 
   @override
   void initState() {
     super.initState();
@@ -25,19 +24,30 @@ class _ScreenSearchState extends State<ScreenSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-        body: SizedBox(
-            width: double.infinity,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  SizedBox(
-                    height: 50,
-                  ),
-                  SpinKitDualRing(
-                    color: Color(0xFF93C572),
-                    size: 50.0,
-                  )
-                ])));
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/logo.png'),
+            const SizedBox(
+              height: 50,
+            ),
+            const SpinKitDualRing(
+              color: Color(0xFF93C572),
+              size: 50.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text('Created : Aswanth DS'),
+              ],
+            )
+          ],
+          
+        ),
+        
+      ),
+    );
   }
 }
